@@ -1,0 +1,29 @@
+set scrolloff=8
+set incsearch
+set nu
+set rnu
+set showmode
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+""" Mappings -----------------------
+let mapleader=" "
+inoremap jj <Esc>
+map <leader>w <Action>(SaveAll)
+nmap <leader>zz <Action>(ToggleDistractionFreeMode)
+map <leader>pv <Action>(FileChooser.GotoHome)
+vmap <Space>c <Action>(CommentByLineComment)<Esc>
+map \r <Action>(ReformatCode)
+nmap <leader>l :b#<Enter>
+
+""" Window -------------------------
+nmap <leader>tn <C-w><C-w>
+nmap <leader>th <C-w><C-h>
+nmap <leader>sv <C-w>v
+nmap <leader>sh <C-w>s

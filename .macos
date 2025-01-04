@@ -1,0 +1,11 @@
+# Mac Defaults
+
+# Default Screenshots path
+defaults write com.apple.screencapture location "~/Screenshots"
+
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Show all filename extensions in Finder
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+

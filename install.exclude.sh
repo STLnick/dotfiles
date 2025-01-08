@@ -21,6 +21,7 @@ link () {
             ln -sfnv "$BASEDIR/Brewfile" "$HOME/Brewfile"
             ln -sfnv "$BASEDIR/nvim" "$HOME/.config/nvim"
             ln -sFnv "$BASEDIR/.nvm" "$HOME/.nvm"
+            ln -sfnv "$BASEDIR/starship.toml" "$HOME/.config/starship.toml"
             ;;
         esac
         echo "Symlinking complete"

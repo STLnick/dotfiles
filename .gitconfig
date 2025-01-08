@@ -1,2 +1,2 @@
-[includeIf "gitdir:~/workspace/github.com/STLnick/"]
+[includeIf "gitdir:~/personal/"]
   	path = .gitconfig-STLnick

@@ -1,18 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs vi_mode)
-# Visual customisation of the second prompt line
-local user_symbol="$"
-if [[ $(print -P "%#") =~ "#" ]]; then
-    user_symbol = "#"
-fi
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
 plugins=(
 	git
 	zsh-autosuggestions
@@ -20,8 +8,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# ---
 
 # Aliases
 alias gc="git checkout"
@@ -54,3 +40,6 @@ function yesterday() {
 export NVM_DIR="$HOME/.nvm"
     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
+# Starship prompt
+eval "$(starship init zsh)"

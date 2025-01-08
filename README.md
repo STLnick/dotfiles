@@ -2,8 +2,8 @@
 
 ## Installation
 
-1. Clone repo to `~/dev`
+1. Clone repo to `~/Developer`
 2. Run install script from `~`
 ```bash
-cd && sh ~/dev/dotfiles/install.exclude.sh
+cd && sh ~/Developer/dotfiles/install.exclude.sh
 ```

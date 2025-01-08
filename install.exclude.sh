@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir ~/.nvm
+mkdir -p ~/.nvm
 
 link () {
     echo "This utility will symlink the files in this repo to the home directory"
@@ -41,7 +41,7 @@ install_tools () {
 
             osascript -e 'tell application "iTerm2" to activate'
 
-            sh ~/dev/dotfiles/check-arm-and-install-rosetta2.sh
+            sh ~/Developer/dotfiles/check-arm-and-install-rosetta2.sh
             echo "Checking if homebrew is installed"
             if [[ $(command -v brew) ]]; then
                 echo "Homebrew is installed"
@@ -64,6 +64,3 @@ install_tools () {
 link
 install_tools
 
-echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
-source ~/.p10k.zsh
-source ~/.zshrc

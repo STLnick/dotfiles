@@ -1,19 +1,8 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-plugins=(
-	git
-	zsh-autosuggestions
-	zsh-vi-mode
-)
-
-source $ZSH/oh-my-zsh.sh
-
 # Aliases
 alias gc="git checkout"
 alias gcb="git checkout -b"
 alias gfp="git fetch origin && git pull"
-alias l="ls -al"
+alias l="ls -alFG"
 alias v="nvim"
 alias cpf="sudo ncat --sh-exec \"ncat platform-local.curate.co 5173\" -l 443 --keep-open"
 alias awsconfig="v ~/.aws/credentials"
@@ -36,6 +25,21 @@ function yesterday() {
     nvim ~/Documents/work/notes/${yesterday}.md
 }
 
+# Use vim motions on cli
+set -o vi
+
+addToPath() {
+    if [[ ! "$PATH" == *"$1"* ]]; then
+        export PATH="$PATH:$1"
+    fi
+}
+
+addToPathFront() {
+    if [[ ! "$PATH" == *"$1"* ]]; then
+        export PATH="$1:$PATH"
+    fi
+}
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
@@ -43,3 +47,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Starship prompt
 eval "$(starship init zsh)"
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
+addToPathFront "$HOME/.local/scripts"
+

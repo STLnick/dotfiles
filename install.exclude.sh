@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p ~/.config
 mkdir -p ~/.nvm
 
 link () {
@@ -10,7 +11,7 @@ link () {
         BASEDIR=$(dirname "$0")
         case $SHELL in
         */zsh)
-            ln -sfnv "$BASEDIR/.p10k.zsh" "$HOME/.p10k.zsh"
+            ln -sfnv "$BASEDIR/.zprofile" "$HOME/.zprofile"
             ln -sfnv "$BASEDIR/.zshrc" "$HOME/.zshrc"
             ln -sfnv "$BASEDIR/.zshenv" "$HOME/.zshenv"
             ln -sfnv "$BASEDIR/.ideavimrc" "$HOME/.ideavimrc"

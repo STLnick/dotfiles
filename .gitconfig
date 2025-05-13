@@ -1,2 +1,7 @@
 [includeIf "gitdir:~/personal/"]
   	path = .gitconfig-STLnick
+[includeIf "gitdir:~/work/"]
+  	path = .gitconfig-STLnick
+[user]
+	email = nickrray@gmail.com
+	name = Nick Ray

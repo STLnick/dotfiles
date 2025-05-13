@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+dir="$HOME/work"
+
+print_usage() {
+  printf "Usage: tmux-sessionizer [-d dir]\n"
+  printf "  -d  dir  Set the directory to find directories to pass to fzf (default: '~/work')\n"
+}
+
+while getopts 'd:' flag; do
+    case "${flag}" in
+        d) dir="${OPTARG}" ;;
+        *) print_usage
+           exit 1 ;;
+    esac
+done
+
+selected=$(find $dir -mindepth 1 -maxdepth 1 -type d | fzf)
+
+if [[ -z "$selected" ]]; then
+    exit 0
+fi
+
+selected_name=$(basename $selected | tr ":,. " "____")
+
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $selected_name
+    else
+        tmux switch-client -t $selected_name
+    fi
+}
+
+if tmux has-session -t=$selected_name 2> /dev/null; then
+    switch_to
+else
+    tmux new-session -d -s $selected_name -c $selected
+    tmux send-keys -t $selected_name "ready-tmux" 
+    switch_to
+fi
+

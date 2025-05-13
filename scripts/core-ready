@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+GREEN='\033[1;92m'
+NC='\033[0m' # No Color
+
+mode='Vite'
+build=''
+
+print_usage() {
+  printf "Usage: core-ready [-b] [-m mode]\n"
+  printf "  -b      Whether to rebuild the containers from scratch (default: false)\n"
+  printf "  -m mode Set the mode (vite or node) for core-apache (default: vite)\n"
+}
+
+while getopts 'hbm:' flag; do
+  case "${flag}" in
+    h) print_usage
+       exit 0 ;;
+    b) build='--build' ;;
+    m)
+      if [[ "${OPTARG}" == "vite" ]]; then
+        mode="Vite"
+      elif [[ "${OPTARG}" == "node" ]]; then
+        mode="NodeJS"
+      else
+        echo "Error: Invalid mode '${OPTARG}'. Allowed values are 'vite' or 'node'."
+        print_usage
+        exit 1
+      fi
+      ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
+        
+if ! docker info > /dev/null 2>&1; then
+    printf "\nStarting Docker . . . "
+    open -a Docker
+    # Wait for Docker to fully start so we can start Docker containers
+    while ! docker info > /dev/null 2>&1; do
+        printf ". "
+        sleep 1
+    done
+    printf "now running ✅\n"
+fi
+
+# Run the commands for postgis, core-apache, keycloak and nats to start up containers
+echo -e "\n${GREEN}- - - - - - Postgis - - - - - -${NC}"
+cd $HOME/work/postgis
+pg16.sh down
+pg16.sh up -d ${build}
+
+echo -e "\n${GREEN}- - - - - - Core-Apache (${mode}) - - - - - -${NC}"
+cd $HOME/work/core-apache
+./stopApache.sh
+./startApachefor${mode}.sh -d ${build}
+
+echo -e "\n${GREEN}- - - - - - Keycloak - - - - - -${NC}"
+cd $HOME/work/keycloak
+docker compose down
+docker compose up -d ${build}
+
+echo -e "\n${GREEN}- - - - - - NATS - - - - - -${NC}"
+cd $HOME/work/nats
+docker compose down
+docker compose up -d ${build}

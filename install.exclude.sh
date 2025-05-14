@@ -42,7 +42,7 @@ install_tools () {
             echo "Setting macOS sane defaults"
             source ~/.macos
 
-            osascript -e 'tell application "iTerm2" to activate'
+            osascript -e 'tell application "Ghostty" to activate'
 
             sh ~/Developer/dotfiles/check-arm-and-install-rosetta2.sh
             echo "Checking if homebrew is installed"

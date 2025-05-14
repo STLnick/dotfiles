@@ -21,6 +21,7 @@ link () {
             ln -sfnv "$BASEDIR/.macos" "$HOME/.macos"
             ln -sfnv "$BASEDIR/Brewfile" "$HOME/Brewfile"
             ln -sfnv "$BASEDIR/nvim" "$HOME/.config/nvim"
+            ln -sfnv "$BASEDIR/tmux" "$HOME/.config/tmux"
             ln -sFnv "$BASEDIR/.nvm" "$HOME/.nvm"
             ln -sfnv "$BASEDIR/starship.toml" "$HOME/.config/starship.toml"
             ;;
